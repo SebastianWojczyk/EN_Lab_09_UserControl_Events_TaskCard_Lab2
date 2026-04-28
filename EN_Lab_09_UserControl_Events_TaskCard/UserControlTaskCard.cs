@@ -12,6 +12,9 @@ namespace EN_Lab_09_UserControl_Events_TaskCard
 {
     public partial class UserControlTaskCard : UserControl
     {
+        //new event for removing - void finctionName(UserControlTaskCard sender)
+        public event Action<UserControlTaskCard> TaskCardRemoving;
+
         public UserControlTaskCard()
         {
             InitializeComponent();
@@ -30,6 +33,15 @@ namespace EN_Lab_09_UserControl_Events_TaskCard
             if (colorDialog.ShowDialog() == DialogResult.OK)
             {
                 this.BackColor = colorDialog.Color;
+            }
+        }
+
+        private void buttonRemove_Click(object sender, EventArgs e)
+        {
+            //check event ("pointer") is null
+            if(TaskCardRemoving != null)
+            {
+                TaskCardRemoving(this);
             }
         }
     }
